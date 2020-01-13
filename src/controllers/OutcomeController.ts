@@ -7,7 +7,7 @@ import { Outcome } from "../entity/InOutcome";
 
 class OutcomeController {
 
-  static listAll = async (req: Request, res: Response) => {
+  static listAllOucomes = async (req: Request, res: Response) => {
     //Get Outcomes from database
     const outcomesRepository = getRepository(Outcome);
     const _outcomes = await outcomesRepository.find({
@@ -18,7 +18,7 @@ class OutcomeController {
     res.send(_outcomes);
   };
 
-  static getOneById = async (req: Request, res: Response) => {
+  static getOneOucomeById = async (req: Request, res: Response) => {
     //Get the ID from the url
     const id: number = req.params.id;
 
@@ -34,7 +34,7 @@ class OutcomeController {
     }
   };
 
-  static newUser = async (req: Request, res: Response) => {
+  static newOucome = async (req: Request, res: Response) => {
     //Get parameters from the body
     let { date, value, description, personInCharge } = req.body;
     let _outcome = new Outcome();
@@ -64,7 +64,7 @@ class OutcomeController {
     res.status(201).send({ id: _outcome.id });
   };
 
-  static editUser = async (req: Request, res: Response) => {
+  static editOucome = async (req: Request, res: Response) => {
     //Get the ID from the url
     const id = req.params.id;
 
@@ -105,7 +105,7 @@ class OutcomeController {
     res.status(204).send();
   };
 
-  static deleteUser = async (req: Request, res: Response) => {
+  static deleteOucome = async (req: Request, res: Response) => {
     //Get the ID from the url
     const id = req.params.id;
 

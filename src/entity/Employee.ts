@@ -35,10 +35,15 @@ export class Employee {
     salary: Number;
 
     @Column()
+    isActive: Boolean;
+
+    @Column()
     @CreateDateColumn()
     createdAt: Date;
 
     @Column()
     @UpdateDateColumn()
     updatedAt: Date;
+
+    totalSalary: Number;
 }

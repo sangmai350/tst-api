@@ -38,17 +38,24 @@ export abstract class InOutcome {
 
 @Entity()
 export class Income extends InOutcome {
-
-    @ManyToOne(type => User, user => user.income)
+    @IsNotEmpty()
+    @ManyToOne(type => User, user => user.incomes)
     personInCharge: User;
 
+    @Column()
+    @IsNotEmpty()
+    totalIncome: Number
 }
 
 @Entity()
 export class Outcome extends InOutcome {
-
-    @ManyToOne(type => User, user => user.oucome)
+    @IsNotEmpty()
+    @ManyToOne(type => User, user => user.oucomes)
     personInCharge: User;
+
+    @Column()
+    @IsNotEmpty()
+    totalOutcome: Number
 
 }
 

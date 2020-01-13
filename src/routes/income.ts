@@ -6,30 +6,30 @@ import { checkRole } from "../middlewares/checkRole";
 const router = Router();
 
 //Get all Incomes
-router.get("/", [checkJwt, checkRole(["ADMIN"])], IncomeController.listAll);
+router.get("/", [checkJwt, checkRole(["ADMIN"])], IncomeController.listAllIncomes);
 
 // Get one Income
 router.get(
   "/:id([0-9]+)",
   [checkJwt, checkRole(["ADMIN"])],
-  IncomeController.getOneById
+  IncomeController.getOneIncomeById
 );
 
 //Create a new Income
-router.post("/", [checkJwt, checkRole(["ADMIN"])], IncomeController.newUser);
+router.post("/", [checkJwt, checkRole(["ADMIN"])], IncomeController.newIncome);
 
 //Edit one Income
 router.patch(
   "/:id([0-9]+)",
   [checkJwt, checkRole(["ADMIN"])],
-  IncomeController.editUser
+  IncomeController.editIncome
 );
 
 //Delete one Income
 router.delete(
   "/:id([0-9]+)",
   [checkJwt, checkRole(["ADMIN"])],
-  IncomeController.deleteUser
+  IncomeController.deleteIncome
 );
 
 export default router;

@@ -7,18 +7,27 @@ import { Income } from "../entity/InOutcome";
 
 class IncomeController {
 
-  static listAll = async (req: Request, res: Response) => {
+  static listAllIncomes = async (req: Request, res: Response) => {
     //Get Incomes from database
     const incomesRepository = getRepository(Income);
-    const _incomes = await incomesRepository.find({
-      select: ["id", "date", "value", "description", "personInCharge"]
-    });
+    // const _incomes = await incomesRepository.find({ relations: ["personInCharge"] });
+
+    const _incomes = await incomesRepository.createQueryBuilder("income").select(
+      ["income.id", "income.date", "income.value", "income.description", "user.username"]
+    )
+      .leftJoin("income.personInCharge", "user")
+      .getMany();
+
+
+    const totalIncome = await getRepository(Income).createQueryBuilder("income")
+      .select("SUM(income.value)", "value")
+      .getRawOne();
 
     //Send the Incomes object
-    res.send(_incomes);
+    res.send({ "Income": _incomes, "TotalIncome": totalIncome });
   };
 
-  static getOneById = async (req: Request, res: Response) => {
+  static getOneIncomeById = async (req: Request, res: Response) => {
     //Get the ID from the url
     const id: number = req.params.id;
 
@@ -34,7 +43,7 @@ class IncomeController {
     }
   };
 
-  static newUser = async (req: Request, res: Response) => {
+  static newIncome = async (req: Request, res: Response) => {
     //Get parameters from the body
     let { date, value, description, personInCharge } = req.body;
     let _income = new Income();
@@ -56,7 +65,7 @@ class IncomeController {
     try {
       await incomeRepository.save(_income);
     } catch (e) {
-      res.status(409).send("Please check your params");
+      res.status(409).send("Please check your params: " + e);
       return;
     }
 
@@ -64,7 +73,7 @@ class IncomeController {
     res.status(201).send({ id: _income.id });
   };
 
-  static editUser = async (req: Request, res: Response) => {
+  static editIncome = async (req: Request, res: Response) => {
     //Get the ID from the url
     const id = req.params.id;
 
@@ -105,7 +114,7 @@ class IncomeController {
     res.status(204).send();
   };
 
-  static deleteUser = async (req: Request, res: Response) => {
+  static deleteIncome = async (req: Request, res: Response) => {
     //Get the ID from the url
     const id = req.params.id;
 

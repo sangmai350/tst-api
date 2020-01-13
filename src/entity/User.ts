@@ -29,11 +29,11 @@ export class User {
   @IsNotEmpty()
   role: string;
 
-  @OneToMany(type => Income, income => income.id)
-  income: Income[];
+  @OneToMany(type => Income, income => income.personInCharge)
+  incomes: Income[];
 
-  @OneToMany(type => Outcome, outcome => outcome.id)
-  oucome: Outcome[];
+  @OneToMany(type => Outcome, outcome => outcome.personInCharge)
+  oucomes: Outcome[];
 
 
   @Column()
