@@ -1,10 +1,10 @@
 {
    "type": "mysql",
-   "host": "198.54.121.133",
+   "host": "us-cdbr-iron-east-05.cleardb.net",
    "port": 3306,
-   "username": "thinhdn_tst",
-   "password": "Abcd123!@#",
-   "database": "company",
+   "username": "bf6bbb64a75d3b",
+   "password": "d3ba5eeb",
+   "database": "heroku_040d23b41f09d70",
    "synchronize": true,
    "logging": false,
    "entities": [
