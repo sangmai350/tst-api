@@ -9,7 +9,6 @@ import {
 import { Length, IsNotEmpty } from "class-validator";
 import { User } from "./User"
 
-@Entity()
 export abstract class InOutcome {
 
     @PrimaryGeneratedColumn()
