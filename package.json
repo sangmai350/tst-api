@@ -26,8 +26,8 @@
     "typeorm": "^0.2.22"
   },
   "scripts": {
-    "tsc": "tsc",
-    "start": "tsc && node ./build/index.js",
+    "build": "tsc",
+    "start": "node ./build/index.js",
     "prod": "tsc && node ./build/index.js",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
     "heroku-prebuild": "npm i && npm run migration:run"
