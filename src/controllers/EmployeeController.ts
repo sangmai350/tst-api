@@ -23,7 +23,7 @@ class EmployeeController {
 
   static getOneEmployeeById = async (req: Request, res: Response) => {
     //Get the ID from the url
-    const id: number = req.params.id;
+    const id: string = req.params.id;
 
     //Get the employee from database
     const employeeRepository = getRepository(Employee);

@@ -20,7 +20,7 @@ class OutcomeController {
 
   static getOneOucomeById = async (req: Request, res: Response) => {
     //Get the ID from the url
-    const id: number = req.params.id;
+    const id: string = req.params.id;
 
     //Get the Outcomes from database
     const outcomesRepository = getRepository(Outcome);

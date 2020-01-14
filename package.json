@@ -27,9 +27,9 @@
   },
   "scripts": {
     "tsc": "tsc",
-    "debug": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
-    "start": "tsc && node ./build/app.js",
+    "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
+    "prod": "tsc && node ./build/app.js",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
-    "heroku-prebuild": "npm run migration:run"
+    "heroku-prebuild": "npm i && npm run migration:run"
   }
 }
