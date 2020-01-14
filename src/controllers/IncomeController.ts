@@ -29,7 +29,7 @@ class IncomeController {
 
   static getOneIncomeById = async (req: Request, res: Response) => {
     //Get the ID from the url
-    const id: number = req.params.id;
+    const id: string = req.params.id;
 
     //Get the Incomes from database
     const incomeRepository = getRepository(Income);
