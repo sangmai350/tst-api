@@ -4,7 +4,7 @@
   "description": "TST API project developed with TypeORM.",
   "devDependencies": {
     "@types/node": "^8.0.29",
-    "ts-node": "^3.3.0",
+    "ts-node": "3.3.0",
     "typescript": "2.5.2"
   },
   "dependencies": {
@@ -32,6 +32,6 @@
     "prod": "tsc && node ./build/app.js",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
     "build": "npm run start",
-    "heroku-prebuild": "rm -rf /node_modules && npm i && npm i ts-node@3.3.0 && npm run migration:run"
+    "heroku-prebuild": "npm run migration:run"
   }
 }
