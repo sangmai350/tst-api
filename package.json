@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "TST API project developed with TypeORM.",
   "devDependencies": {
-    "@types/node": "3.3.0",
+    "@types/node": "13.1.6",
     "ts-node": "3.3.0",
     "typescript": "2.5.2"
   },
@@ -30,6 +30,7 @@
     "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
     "prod": "tsc && node ./build/app.js",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
-    "build": "npm run start"
+    "build": "npm run start",
+    "heroku-prebuild": "npm run migration:run"
   }
 }
