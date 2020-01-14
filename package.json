@@ -32,6 +32,6 @@
     "prod": "tsc && node ./build/app.js",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
     "build": "npm run start",
-    "heroku-prebuild": "npm i ts-node@3.3.0 && npm run migration:run"
+    "heroku-prebuild": "rm -rf /node_modules && npm i && npm i ts-node@3.3.0 && npm run migration:run"
   }
 }
