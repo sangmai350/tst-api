@@ -1,1 +1,1 @@
-web:ts-node/src/index.ts
+web:setdebug=*&&ts-node-dev--respawn--transpileOnly./src/index.ts
