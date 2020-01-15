@@ -26,11 +26,10 @@
     "typeorm": "^0.2.22"
   },
   "scripts": {
-    "tsc": "tsc",
-    "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
-    "prod": "tsc && node ./build/app.js",
+    "build": "tsc",
+    "start": "node ./build/index.js",
+    "prod": "tsc && node ./build/index.js",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
-    "build": "npm run start",
     "heroku-prebuild": "npm run migration:run"
   }
 }
