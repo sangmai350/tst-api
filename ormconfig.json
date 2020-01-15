@@ -1,10 +1,6 @@
 {
-   "type": "mysql",
-   "host": "us-cdbr-iron-east-05.cleardb.net",
-   "port": 3306,
-   "username": "bf6bbb64a75d3b",
-   "password": "d3ba5eeb",
-   "database": "heroku_040d23b41f09d70",
+   "type": "sqlite",
+   "database": "database.sqlite",
    "synchronize": true,
    "logging": false,
    "entities": [
