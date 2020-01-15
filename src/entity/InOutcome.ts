@@ -42,7 +42,6 @@ export class Income extends InOutcome {
     personInCharge: User;
 
     @Column()
-    @IsNotEmpty()
     totalIncome: Number
 }
 
@@ -53,7 +52,6 @@ export class Outcome extends InOutcome {
     personInCharge: User;
 
     @Column()
-    @IsNotEmpty()
     totalOutcome: Number
 
 }
