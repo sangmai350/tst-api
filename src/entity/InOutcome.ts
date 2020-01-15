@@ -41,7 +41,6 @@ export class Income extends InOutcome {
     @ManyToOne(type => User, user => user.incomes)
     personInCharge: User;
 
-    @Column()
     totalIncome: Number
 }
 
@@ -51,7 +50,6 @@ export class Outcome extends InOutcome {
     @ManyToOne(type => User, user => user.oucomes)
     personInCharge: User;
 
-    @Column()
     totalOutcome: Number
 
 }
