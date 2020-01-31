@@ -1,56 +1,31 @@
+import { IsNotEmpty } from "class-validator";
 import {
-    Entity,
-    PrimaryGeneratedColumn,
     Column,
     CreateDateColumn,
+    PrimaryGeneratedColumn,
     UpdateDateColumn,
-    ManyToOne
 } from "typeorm";
-import { Length, IsNotEmpty } from "class-validator";
-import { User } from "./User"
 
 export abstract class InOutcome {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    public id: number;
 
     @Column()
-    value: Number;
+    public value: number;
 
     @Column()
-    date: Date;
-
+    public date: Date;
 
     @Column()
     @IsNotEmpty()
-    description: string;
+    public description: string;
 
     @Column()
     @CreateDateColumn()
-    createdAt: Date;
+    public createdAt: Date;
 
     @Column()
     @UpdateDateColumn()
-    updatedAt: Date;
+    public updatedAt: Date;
 }
-
-
-@Entity()
-export class Income extends InOutcome {
-    @IsNotEmpty()
-    @ManyToOne(type => User, user => user.incomes)
-    personInCharge: User;
-
-    totalIncome: Number
-}
-
-@Entity()
-export class Outcome extends InOutcome {
-    @IsNotEmpty()
-    @ManyToOne(type => User, user => user.oucomes)
-    personInCharge: User;
-
-    totalOutcome: Number
-
-}
-

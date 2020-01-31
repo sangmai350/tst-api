@@ -1,9 +1,9 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 import auth from "./auth";
-import user from "./user";
 import employee from "./employee";
 import income from "./income"
 import outcome from "./outcome"
+import user from "./user";
 const routes = Router();
 
 routes.use("/auth", auth);

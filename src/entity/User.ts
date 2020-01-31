@@ -1,54 +1,54 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  Unique,
-  CreateDateColumn,
-  UpdateDateColumn,
-  OneToMany
-} from "typeorm";
-import { Length, IsNotEmpty } from "class-validator";
 import * as bcrypt from "bcryptjs";
-import { InOutcome, Income, Outcome } from "./InOutcome";
+import { IsNotEmpty, Length } from "class-validator";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  Unique,
+  UpdateDateColumn,
+} from "typeorm";
+import { Income } from "./Income";
+import { Outcome } from "./Outcome";
 
 @Entity()
 @Unique(["username"])
 export class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column()
   @Length(4, 20)
-  username: string;
+  public username: string;
 
   @Column()
   @Length(4, 100)
-  password: string;
+  public password: string;
 
   @Column()
   @IsNotEmpty()
-  role: string;
+  public role: string;
 
-  @OneToMany(type => Income, income => income.personInCharge)
-  incomes: Income[];
+  @OneToMany((type) => Income, (income) => income.personInCharge)
+  public incomes: Income[];
 
-  @OneToMany(type => Outcome, outcome => outcome.personInCharge)
-  oucomes: Outcome[];
-
+  @OneToMany((type) => Outcome, (outcome) => outcome.personInCharge)
+  public oucomes: Outcome[];
 
   @Column()
   @CreateDateColumn()
-  createdAt: Date;
+  public createdAt: Date;
 
   @Column()
   @UpdateDateColumn()
-  updatedAt: Date;
+  public updatedAt: Date;
 
-  hashPassword() {
+  public hashPassword() {
     this.password = bcrypt.hashSync(this.password, 8);
   }
 
-  checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
+  public checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
     return bcrypt.compareSync(unencryptedPassword, this.password);
   }
 }
