@@ -29,7 +29,7 @@
   "scripts": {
     "build": "tsc",
     "start:dev": "ts-node src/index.ts",
-    "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
+    "start": "set debug=* && ts-node-dev --respawn --transpile-only src/index.ts",
     "prod": "tsc && node ./build/index.js",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
   }
