@@ -40,7 +40,7 @@ class UserController {
     user.password = password;
     user.role = role;
 
-    // Validate if the parameters are ok
+    // Validate if the parameters are ok ok
     const errors = await validate(user);
     if (errors.length > 0) {
       res.status(400).send(errors);
