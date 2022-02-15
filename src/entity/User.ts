@@ -34,7 +34,7 @@ export class User {
   public incomes: Income[];
 
   @OneToMany((type) => Outcome, (outcome) => outcome.personInCharge)
-  public oucomes: Outcome[];
+  public outcomes: Outcome[];
 
   @Column()
   @CreateDateColumn()

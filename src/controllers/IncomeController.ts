@@ -1,29 +1,34 @@
-
 import { validate } from "class-validator";
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { Income } from "../entity/Income";
 
 class IncomeController {
-
   public static listAllIncomes = async (req: Request, res: Response) => {
     // Get Incomes from database
     const incomesRepository = getRepository(Income);
     // const _incomes = await incomesRepository.find({ relations: ["personInCharge"] });
 
-    const incomes = await incomesRepository.createQueryBuilder("income").select(
-      ["income.id", "income.date", "income.value", "income.description", "user.username"],
-    )
+    const incomes = await incomesRepository
+      .createQueryBuilder("income")
+      .select([
+        "income.id",
+        "income.date",
+        "income.value",
+        "income.description",
+        "user.username",
+      ])
       .leftJoin("income.personInCharge", "user")
       .getMany();
 
-    const totalIncome = await getRepository(Income).createQueryBuilder("income")
+    const totalIncome = await getRepository(Income)
+      .createQueryBuilder("income")
       .select("SUM(income.value)", "value")
       .getRawOne();
 
     // Send the Incomes object
     res.send({ Income: incomes, TotalIncome: totalIncome });
-  }
+  };
 
   public static getOneIncomeById = async (req: Request, res: Response) => {
     // Get the ID from the url
@@ -39,7 +44,7 @@ class IncomeController {
     } catch (error) {
       res.status(404).send("Incomes not found");
     }
-  }
+  };
 
   public static newIncome = async (req: Request, res: Response) => {
     // Get parameters from the body
@@ -50,7 +55,7 @@ class IncomeController {
     income.description = description;
     income.personInCharge = personInCharge;
 
-    // Validade if the parameters are ok
+    // Validate if the parameters are ok
     const errors = await validate(income);
     if (errors.length > 0) {
       res.status(400).send(errors);
@@ -68,7 +73,7 @@ class IncomeController {
 
     // If all ok, send 201 response
     res.status(201).send({ id: income.id });
-  }
+  };
 
   public static editIncome = async (req: Request, res: Response) => {
     // Get the ID from the url
@@ -109,7 +114,7 @@ class IncomeController {
     }
     // After all send a 204 (no content, but accepted) response
     res.status(204).send();
-  }
+  };
 
   public static deleteIncome = async (req: Request, res: Response) => {
     // Get the ID from the url
@@ -127,7 +132,7 @@ class IncomeController {
 
     // After all send a 204 (no content, but accepted) response
     res.status(204).send();
-  }
+  };
 }
 
 export default IncomeController;

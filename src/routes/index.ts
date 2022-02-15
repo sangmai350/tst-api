@@ -1,8 +1,8 @@
 import { Router } from "express";
 import auth from "./auth";
 import employee from "./employee";
-import income from "./income"
-import outcome from "./outcome"
+import income from "./income";
+import outcome from "./outcome";
 import user from "./user";
 const routes = Router();
 

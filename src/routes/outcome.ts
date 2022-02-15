@@ -6,30 +6,38 @@ import { checkRole } from "../middlewares/checkRole";
 const router = Router();
 
 // Get all Outcomes
-router.get("/", [checkJwt, checkRole(["ADMIN"])], OutcomeController.listAllOucomes);
+router.get(
+  "/",
+  [checkJwt, checkRole(["ADMIN"])],
+  OutcomeController.listAllOutcomes
+);
 
 // Get one Outcome
 router.get(
   "/:id([0-9]+)",
   [checkJwt, checkRole(["ADMIN"])],
-  OutcomeController.getOneOucomeById,
+  OutcomeController.getOneOutcomeById
 );
 
 // Create a new Outcome
-router.post("/", [checkJwt, checkRole(["ADMIN"])], OutcomeController.newOucome);
+router.post(
+  "/",
+  [checkJwt, checkRole(["ADMIN"])],
+  OutcomeController.newOutcome
+);
 
 // Edit one Outcome
 router.patch(
   "/:id([0-9]+)",
   [checkJwt, checkRole(["ADMIN"])],
-  OutcomeController.editOucome,
+  OutcomeController.editOutcome
 );
 
 // Delete one Outcome
 router.delete(
   "/:id([0-9]+)",
   [checkJwt, checkRole(["ADMIN"])],
-  OutcomeController.deleteOucome,
+  OutcomeController.deleteOutcome
 );
 
 export default router;

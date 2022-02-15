@@ -1,24 +1,33 @@
-
 import { validate } from "class-validator";
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { Employee } from "../entity/Employee";
 
 class EmployeeController {
-
   public static listAllEmployees = async (req: Request, res: Response) => {
     // Get employees from database
     const employeeRepository = getRepository(Employee);
     const employees = await employeeRepository.find({
-      select: ["id", "name", "dob", "address", "phone", "salary", "isActive", "joinDate"],
+      select: [
+        "id",
+        "name",
+        "dob",
+        "address",
+        "phone",
+        "salary",
+        "isActive",
+        "joinDate",
+      ],
     });
-    const sumSalary = await getRepository(Employee).createQueryBuilder("employee")
+    const sumSalary = await getRepository(Employee)
+      .createQueryBuilder("employee")
       .select("SUM(employee.salary)", "value")
-      .where("employee.isActive = :isActive", { isActive: true }).getRawOne();
+      .where("employee.isActive = :isActive", { isActive: true })
+      .getRawOne();
 
     // Send the employees object
     res.send({ Employee: employees, TotalSalary: sumSalary });
-  }
+  };
 
   public static getOneEmployeeById = async (req: Request, res: Response) => {
     // Get the ID from the url
@@ -28,13 +37,22 @@ class EmployeeController {
     const employeeRepository = getRepository(Employee);
     try {
       const employee = await employeeRepository.findOneOrFail(id, {
-        select: ["id", "name", "dob", "address", "phone", "salary", "isActive", "joinDate"],
+        select: [
+          "id",
+          "name",
+          "dob",
+          "address",
+          "phone",
+          "salary",
+          "isActive",
+          "joinDate",
+        ],
       });
       res.send(employee);
     } catch (error) {
       res.status(404).send("Employee not found");
     }
-  }
+  };
 
   public static newEmployee = async (req: Request, res: Response) => {
     // Get parameters from the body
@@ -48,7 +66,7 @@ class EmployeeController {
     employee.joinDate = joinDate;
     employee.isActive = isActive;
 
-    // Validade if the parameters are ok
+    // Validate if the parameters are ok
     const errors = await validate(employee);
     if (errors.length > 0) {
       res.status(400).send(errors);
@@ -66,7 +84,7 @@ class EmployeeController {
 
     // If all ok, send 201 response
     res.status(201).send({ id: employee.id });
-  }
+  };
 
   public static editEmployee = async (req: Request, res: Response) => {
     // Get the ID from the url
@@ -109,7 +127,7 @@ class EmployeeController {
     }
     // After all send a 204 (no content, but accepted) response
     res.status(204).send();
-  }
+  };
 
   public static deleteEmployee = async (req: Request, res: Response) => {
     // Get the ID from the url
@@ -127,7 +145,7 @@ class EmployeeController {
 
     // After all send a 204 (no content, but accepted) response
     res.status(204).send();
-  }
+  };
 }
 
 export default EmployeeController;

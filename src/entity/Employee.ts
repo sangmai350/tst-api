@@ -1,49 +1,47 @@
 import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    CreateDateColumn,
-    UpdateDateColumn
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Length, IsNotEmpty } from "class-validator";
 
-
-
 @Entity()
 export class Employee {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    @Length(4, 100)
-    name: string;
+  @Column()
+  @Length(4, 100)
+  name: string;
 
-    @Column()
-    dob: Date;
+  @Column()
+  dob: Date;
 
-    @Column()
-    @Length(4, 100)
-    address: string;
+  @Column()
+  @Length(4, 100)
+  address: string;
 
-    @Column()
-    phone: Number;
+  @Column()
+  phone: Number;
 
-    @Column()
-    joinDate: Date;
+  @Column()
+  joinDate: Date;
 
-    @Column()
-    salary: Number;
+  @Column()
+  salary: Number;
 
-    @Column()
-    isActive: Boolean;
+  @Column()
+  isActive: Boolean;
 
-    @Column()
-    @CreateDateColumn()
-    createdAt: Date;
+  @Column()
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @Column()
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @Column()
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    totalSalary: Number;
+  totalSalary: Number;
 }

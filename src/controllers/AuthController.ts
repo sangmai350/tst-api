@@ -33,12 +33,12 @@ class AuthController {
     const token = jwt.sign(
       { userId: user.id, username: user.username },
       config.jwtSecret,
-      { expiresIn: "8h" },
+      { expiresIn: "8h" }
     );
 
     // Send the jwt in the response
     res.send({ token });
-  }
+  };
 
   public static changePassword = async (req: Request, res: Response) => {
     // Get ID from JWT
@@ -59,13 +59,13 @@ class AuthController {
       res.status(401).send();
     }
 
-    // Check if old password matchs
+    // Check if old password match
     if (!user.checkIfUnencryptedPasswordIsValid(oldPassword)) {
       res.status(401).send();
       return;
     }
 
-    // Validate de model (password lenght)
+    // Validate de model (password length)
     user.password = newPassword;
     const errors = await validate(user);
     if (errors.length > 0) {
@@ -77,6 +77,6 @@ class AuthController {
     userRepository.save(user);
 
     res.status(204).send();
-  }
+  };
 }
 export default AuthController;

@@ -12,7 +12,7 @@ router.get("/", [checkJwt, checkRole(["ADMIN"])], UserController.listAll);
 router.get(
   "/:id([0-9]+)",
   [checkJwt, checkRole(["ADMIN"])],
-  UserController.getOneById,
+  UserController.getOneById
 );
 
 // Create a new user
@@ -22,14 +22,14 @@ router.post("/", [checkJwt, checkRole(["ADMIN"])], UserController.newUser);
 router.patch(
   "/:id([0-9]+)",
   [checkJwt, checkRole(["ADMIN"])],
-  UserController.editUser,
+  UserController.editUser
 );
 
 // Delete one user
 router.delete(
   "/:id([0-9]+)",
   [checkJwt, checkRole(["ADMIN"])],
-  UserController.deleteUser,
+  UserController.deleteUser
 );
 
 export default router;

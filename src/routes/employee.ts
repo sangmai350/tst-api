@@ -6,30 +6,38 @@ import { checkRole } from "../middlewares/checkRole";
 const router = Router();
 
 // Get all Employees
-router.get("/", [checkJwt, checkRole(["ADMIN"])], EmployeeController.listAllEmployees);
+router.get(
+  "/",
+  [checkJwt, checkRole(["ADMIN"])],
+  EmployeeController.listAllEmployees
+);
 
 // Get one Employee
 router.get(
   "/:id([0-9]+)",
   [checkJwt, checkRole(["ADMIN"])],
-  EmployeeController.getOneEmployeeById,
+  EmployeeController.getOneEmployeeById
 );
 
 // Create a new Employee
-router.post("/", [checkJwt, checkRole(["ADMIN"])], EmployeeController.newEmployee);
+router.post(
+  "/",
+  [checkJwt, checkRole(["ADMIN"])],
+  EmployeeController.newEmployee
+);
 
 // Edit one Employee
 router.patch(
   "/:id([0-9]+)",
   [checkJwt, checkRole(["ADMIN"])],
-  EmployeeController.editEmployee,
+  EmployeeController.editEmployee
 );
 
 // Delete one Employee
 router.delete(
   "/:id([0-9]+)",
   [checkJwt, checkRole(["ADMIN"])],
-  EmployeeController.deleteEmployee,
+  EmployeeController.deleteEmployee
 );
 
 export default router;

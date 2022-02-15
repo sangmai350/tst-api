@@ -1,29 +1,34 @@
-
 import { validate } from "class-validator";
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { Outcome } from "../entity/Outcome";
 
 class OutcomeController {
-
-  public static listAllOucomes = async (req: Request, res: Response) => {
+  public static listAllOutcomes = async (req: Request, res: Response) => {
     // Get Outcomes from database
     const outcomesRepository = getRepository(Outcome);
-    const outcomes = await outcomesRepository.createQueryBuilder("outcome").select(
-      ["outcome.id", "outcome.date", "outcome.value", "outcome.description", "user.username"],
-    )
+    const outcomes = await outcomesRepository
+      .createQueryBuilder("outcome")
+      .select([
+        "outcome.id",
+        "outcome.date",
+        "outcome.value",
+        "outcome.description",
+        "user.username",
+      ])
       .leftJoin("outcome.personInCharge", "user")
       .getMany();
 
-    const totalOutcome = await getRepository(Outcome).createQueryBuilder("outcome")
+    const totalOutcome = await getRepository(Outcome)
+      .createQueryBuilder("outcome")
       .select("SUM(outcome.value)", "value")
       .getRawOne();
 
     // Send the Incomes object
-    res.send({ Income: outcomes, TotalIncome: totalOutcome });
-  }
+    res.send({ Outcome: outcomes, TotalOutcome: totalOutcome });
+  };
 
-  public static getOneOucomeById = async (req: Request, res: Response) => {
+  public static getOneOutcomeById = async (req: Request, res: Response) => {
     // Get the ID from the url
     const id: string = req.params.id;
 
@@ -37,9 +42,9 @@ class OutcomeController {
     } catch (error) {
       res.status(404).send("Outcome not found");
     }
-  }
+  };
 
-  public static newOucome = async (req: Request, res: Response) => {
+  public static newOutcome = async (req: Request, res: Response) => {
     // Get parameters from the body
     const { date, value, description, personInCharge } = req.body;
     const outcome = new Outcome();
@@ -48,7 +53,7 @@ class OutcomeController {
     outcome.description = description;
     outcome.personInCharge = personInCharge;
 
-    // Validade if the parameters are ok
+    // Validate if the parameters are ok
     const errors = await validate(outcome);
     if (errors.length > 0) {
       res.status(400).send(errors);
@@ -66,9 +71,9 @@ class OutcomeController {
 
     // If all ok, send 201 response
     res.status(201).send({ id: outcome.id });
-  }
+  };
 
-  public static editOucome = async (req: Request, res: Response) => {
+  public static editOutcome = async (req: Request, res: Response) => {
     // Get the ID from the url
     const id = req.params.id;
 
@@ -107,9 +112,9 @@ class OutcomeController {
     }
     // After all send a 204 (no content, but accepted) response
     res.status(204).send();
-  }
+  };
 
-  public static deleteOucome = async (req: Request, res: Response) => {
+  public static deleteOutcome = async (req: Request, res: Response) => {
     // Get the ID from the url
     const id = req.params.id;
 
@@ -125,7 +130,7 @@ class OutcomeController {
 
     // After all send a 204 (no content, but accepted) response
     res.status(204).send();
-  }
+  };
 }
 
 export default OutcomeController;
