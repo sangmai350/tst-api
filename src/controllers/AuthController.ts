@@ -20,12 +20,12 @@ class AuthController {
     try {
       user = await userRepository.findOneOrFail({ where: { username } });
     } catch (error) {
-      res.status(401).send();
+      res.status(401).send("Please check username or password again");
     }
 
     // Check if encrypted password match
     if (!user.checkIfUnencryptedPasswordIsValid(password)) {
-      res.status(401).send();
+      res.status(401).send("Please check username or password again");
       return;
     }
 
@@ -56,7 +56,7 @@ class AuthController {
     try {
       user = await userRepository.findOneOrFail(id);
     } catch (id) {
-      res.status(401).send();
+      res.status(401).send("Please check username or password again");
     }
 
     // Check if old password match
