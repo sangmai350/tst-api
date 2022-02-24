@@ -10,8 +10,8 @@ class AuthController {
   public static login = async (req: Request, res: Response) => {
     // Check if username and password are set
     const { username, password } = req.body;
-    if (!(username && password)) {
-      res.status(400).send();
+    if (!username || !password) {
+      res.status(400).send("Please check username or password again");
     }
 
     // Get user from database
