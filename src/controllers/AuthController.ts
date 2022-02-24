@@ -15,6 +15,7 @@ class AuthController {
     const { username, password } = req.body;
     if (username == null || password == null || username == "") {
       res.status(400).send(unauthorizedMsg);
+      return;
     }
 
     // Get user from database
@@ -24,6 +25,7 @@ class AuthController {
       user = await userRepository.findOneOrFail({ where: { username } });
     } catch (error) {
       res.status(401).send(unauthorizedMsg);
+      return;
     }
 
     // Check if encrypted password match
@@ -40,7 +42,7 @@ class AuthController {
     );
 
     // Send the jwt in the response
-    res.send({ token });
+    res.send({ status: "OK", token });
   };
 
   public static changePassword = async (req: Request, res: Response) => {
@@ -51,6 +53,7 @@ class AuthController {
     const { oldPassword, newPassword } = req.body;
     if (!(oldPassword && newPassword)) {
       res.status(400).send();
+      return;
     }
 
     // Get user from the database
@@ -60,6 +63,7 @@ class AuthController {
       user = await userRepository.findOneOrFail(id);
     } catch (id) {
       res.status(401).send(unauthorizedMsg);
+      return;
     }
 
     // Check if old password match
